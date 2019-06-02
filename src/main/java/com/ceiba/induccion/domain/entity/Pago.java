@@ -2,11 +2,9 @@ package com.ceiba.induccion.domain.entity;
 
 import java.util.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Pago {
 
 	private long id;
@@ -14,14 +12,4 @@ public class Pago {
 	private long valor;
 	private String usuarioRegistro;
 	private Date fechaRegistro;
-
-	public Pago(long id, Registro registro, long valor, String usuarioRegistro, Date fechaRegistro) {
-		super();
-		this.id = id;
-		this.registro = registro;
-		this.valor = valor;
-		this.usuarioRegistro = usuarioRegistro;
-		this.fechaRegistro = fechaRegistro;
-	}
-
 }
