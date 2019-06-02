@@ -2,8 +2,6 @@ package com.ceiba.induccion.domain.entity;
 
 import java.util.Date;
 
-import lombok.Data;
-
 public class Registro {
 	private long id;
 	private Vehiculo vehiculo;
@@ -75,11 +73,11 @@ public class Registro {
 	}
 
 	public String getUsuario() {
-		return Usuario;
+		return usuario;
 	}
 
 	public void setUsuario(String usuario) {
-		Usuario = usuario;
+		this.usuario = usuario;
 	}
 
 }
