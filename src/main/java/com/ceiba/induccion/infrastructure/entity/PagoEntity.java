@@ -10,11 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 public class PagoEntity {
 	@Id
@@ -42,5 +37,45 @@ public class PagoEntity {
 		this.registroEntity = registroEntity;
 		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = fechaRegistro;
-	}	
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public RegistroEntity getRegistroEntity() {
+		return registroEntity;
+	}
+
+	public void setRegistroEntity(RegistroEntity registroEntity) {
+		this.registroEntity = registroEntity;
+	}
+
+	public String getUsuarioRegistro() {
+		return usuarioRegistro;
+	}
+
+	public void setUsuarioRegistro(String usuarioRegistro) {
+		this.usuarioRegistro = usuarioRegistro;
+	}
+
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
 }

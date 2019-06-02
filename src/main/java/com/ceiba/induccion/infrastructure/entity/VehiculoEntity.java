@@ -12,11 +12,6 @@ import javax.persistence.Id;
 
 import com.ceiba.induccion.domain.entity.TipoVehiculo;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 public class VehiculoEntity {
 
@@ -52,6 +47,54 @@ public class VehiculoEntity {
 		this.tipo = tipo;
 		this.cilindraje = cilindraje;
 		this.usuarioRegistro = usuarioRegistro;
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public TipoVehiculo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoVehiculo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Integer getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(Integer cilindraje) {
+		this.cilindraje = cilindraje;
+	}
+
+	public String getUsuarioRegistro() {
+		return usuarioRegistro;
+	}
+
+	public void setUsuarioRegistro(String usuarioRegistro) {
+		this.usuarioRegistro = usuarioRegistro;
+	}
+
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
