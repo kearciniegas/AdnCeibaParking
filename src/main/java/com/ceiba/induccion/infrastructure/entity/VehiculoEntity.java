@@ -27,7 +27,7 @@ public class VehiculoEntity {
 	private TipoVehiculo tipo;
 
 	@Column
-	private Integer cilindraje;
+	private long cilindraje;
 
 	@Column
 	private String usuarioRegistro;
@@ -39,7 +39,7 @@ public class VehiculoEntity {
 		super();
 	}
 
-	public VehiculoEntity(long id, String placa, TipoVehiculo tipo, Integer cilindraje, String usuarioRegistro,
+	public VehiculoEntity(long id, String placa, TipoVehiculo tipo, long cilindraje, String usuarioRegistro,
 			Date fechaRegistro) {
 		super();
 		this.id = id;
@@ -74,11 +74,11 @@ public class VehiculoEntity {
 		this.tipo = tipo;
 	}
 
-	public Integer getCilindraje() {
+	public long getCilindraje() {
 		return cilindraje;
 	}
 
-	public void setCilindraje(Integer cilindraje) {
+	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 

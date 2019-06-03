@@ -10,10 +10,10 @@ import com.ceiba.induccion.infrastructure.entity.RegistroEntity;
 
 public class MapperRegistro {
 	@Autowired
-	private MapperVehiculo MapperVehiculo;
+	private MapperVehiculo mapperVehiculo;
 
-	public Registro mapToDomain(RegistroEntity registroEntidad) {
-		return new Registro(registroEntidad.getId(), vehiculoMapper.mapToDomain(registroEntidad.getVehiculo()),
+	public Registro mapToDomain(RegistroEntity registroEntidad) throws Exception {
+		return new Registro(registroEntidad.getId(), mapperVehiculo.mapToDomain(registroEntidad.getVehiculo()),
 				registroEntidad.getInicio(), registroEntidad.getFin(), registroEntidad.getUsuarioRegistro(),
 				registroEntidad.getFechaRegistro());
 	}
@@ -21,16 +21,23 @@ public class MapperRegistro {
 	public List<Registro> mapToDomain(Iterable<RegistroEntity> listaEntidad) {
 		List<Registro> listaRegistro = new ArrayList<>();
 		listaEntidad.forEach(registroEntidad -> {
-			Registro registro = new Registro(registroEntidad.getId(),
-					vehiculoMapper.mapToDomain(registroEntidad.getVehiculo()), registroEntidad.getInicio(),
-					registroEntidad.getFin(), registroEntidad.getUsuarioRegistro(), registroEntidad.getFechaRegistro());
+			Registro registro = null;
+			try {
+				registro = new Registro(registroEntidad.getId(),
+						mapperVehiculo.mapToDomain(registroEntidad.getVehiculo()), registroEntidad.getInicio(),
+						registroEntidad.getFin(), registroEntidad.getUsuarioRegistro(),
+						registroEntidad.getFechaRegistro());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			listaRegistro.add(registro);
 		});
 		return listaRegistro;
 	}
 
 	public RegistroEntity mapToEntity(Registro registro) {
-		return new RegistroEntity(registro.getId(), vehiculoMapper.mapToEntity(registro.getVehiculo()),
-				registro.getInicio(), registro.getFin(), registro.getUsuarioRegistro(), registro.getFechaRegistro());
+		return new RegistroEntity(registro.getId(), mapperVehiculo.mapToEntity(registro.getVehiculo()),
+				registro.getFechaEntrada(), registro.getFechaSalida(), registro.getUsuario(),
+				registro.getFechaRegistro());
 	}
 }
