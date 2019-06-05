@@ -2,32 +2,28 @@ package com.ceiba.induccion.comun.domain.entity;
 
 import java.util.Date;
 
-
 public class Pago {
 
 	private long id;
 	private Registro registro;
-	private long valor;
-	private String usuarioRegistro;
+	private double valor;
 	private Date fechaRegistro;
 
 	public Pago() {
 		super();
 	}
 
-	public Pago(long id, long valor, Registro registro, String usuarioRegistro, Date fechaRegistro) {
+	public Pago(long id, double valor, Registro registro, Date fechaRegistro) {
 		super();
 		this.id = id;
 		this.valor = valor;
 		this.registro = registro;
-		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Pago(long valor, Registro registro, String usuarioRegistro) {
+	public Pago(double valor, Registro registro) {
 		this.valor = valor;
 		this.registro = registro;
-		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = new Date();
 	}
 
@@ -43,7 +39,7 @@ public class Pago {
 		return valor;
 	}
 
-	public void setValor(long valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
@@ -53,14 +49,6 @@ public class Pago {
 
 	public void setRegistro(Registro registro) {
 		this.registro = registro;
-	}
-
-	public String getUsuarioRegistro() {
-		return usuarioRegistro;
-	}
-
-	public void setUsuarioRegistro(String usuarioRegistro) {
-		this.usuarioRegistro = usuarioRegistro;
 	}
 
 	public Date getFechaRegistro() {

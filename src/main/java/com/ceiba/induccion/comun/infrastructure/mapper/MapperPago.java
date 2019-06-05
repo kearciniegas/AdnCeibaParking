@@ -13,9 +13,8 @@ public class MapperPago {
 
 	@Autowired
 	private MapperRegistro mapperRegistro;
-
+	
 	public PagoEntity mapToEntity(Pago pago) {
-		return new PagoEntity(pago.getId(), pago.getValor(), mapperRegistro.mapToEntity(pago.getRegistro()),
-				pago.getUsuarioRegistro(), pago.getFechaRegistro());
+		return new PagoEntity(pago.getId(), pago.getValor(), mapperRegistro.mapToEntity(pago.getRegistro()), pago.getFechaRegistro());
 	}
 }

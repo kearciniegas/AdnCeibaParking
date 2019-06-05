@@ -5,7 +5,7 @@ public class VehiculoDto {
 	private long id;
 	private String placa;
 	private String tipo;
-	private Integer cilindraje;
+	private long cilindraje;
 
 	public VehiculoDto() {
 		super();
@@ -35,11 +35,11 @@ public class VehiculoDto {
 		this.tipo = tipo;
 	}
 
-	public Integer getCilindraje() {
+	public long getCilindraje() {
 		return cilindraje;
 	}
 
-	public void setCilindraje(Integer cilindraje) {
+	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 

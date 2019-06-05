@@ -29,13 +29,11 @@ public class PagoEntity {
 	@Column(nullable = false)
 	private Date fechaRegistro;
 
-	public PagoEntity(long id, double valor, RegistroEntity registroEntity, String usuarioRegistro,
-			Date fechaRegistro) {
+	public PagoEntity(long id, double valor, RegistroEntity registroEntity, Date fechaRegistro) {
 		super();
 		this.id = id;
 		this.valor = valor;
 		this.registroEntity = registroEntity;
-		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = fechaRegistro;
 	}
 
@@ -61,14 +59,6 @@ public class PagoEntity {
 
 	public void setRegistroEntity(RegistroEntity registroEntity) {
 		this.registroEntity = registroEntity;
-	}
-
-	public String getUsuarioRegistro() {
-		return usuarioRegistro;
-	}
-
-	public void setUsuarioRegistro(String usuarioRegistro) {
-		this.usuarioRegistro = usuarioRegistro;
 	}
 
 	public Date getFechaRegistro() {

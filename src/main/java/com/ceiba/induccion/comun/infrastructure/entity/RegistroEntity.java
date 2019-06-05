@@ -33,14 +33,12 @@ public class RegistroEntity {
 	@Column
 	private Date fechaRegistro;
 
-	public RegistroEntity(long id, VehiculoEntity vehiculo, Date inicio, Date fin, String usuarioRegistro,
-			Date fechaRegistro) {
+	public RegistroEntity(long id, VehiculoEntity vehiculo, Date inicio, Date fin, Date fechaRegistro) {
 		super();
 		this.id = id;
 		this.vehiculo = vehiculo;
 		this.inicio = inicio;
 		this.fin = fin;
-		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = fechaRegistro;
 	}
 
@@ -74,14 +72,6 @@ public class RegistroEntity {
 
 	public void setFin(Date fin) {
 		this.fin = fin;
-	}
-
-	public String getUsuarioRegistro() {
-		return usuarioRegistro;
-	}
-
-	public void setUsuarioRegistro(String usuarioRegistro) {
-		this.usuarioRegistro = usuarioRegistro;
 	}
 
 	public Date getFechaRegistro() {

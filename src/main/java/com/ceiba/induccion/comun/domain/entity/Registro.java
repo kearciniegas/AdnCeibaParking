@@ -7,27 +7,22 @@ public class Registro {
 	private Vehiculo vehiculo;
 	private Date fechaEntrada;
 	private Date fechaSalida;
-	private String usuario;
 	private Date fechaRegistro;
 
 	public Registro() {
-		super();
 	}
 
-	public Registro(long id, Vehiculo vehiculo, Date fechaEntrada, Date fechaSalida, String usuario,
-			Date fechaRegistro) {
+	public Registro(long id, Vehiculo vehiculo, Date fechaEntrada, Date fechaSalida, Date fechaRegistro) {
 		super();
 		this.id = id;
 		this.vehiculo = vehiculo;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaSalida;
-		this.usuario = usuario;
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Registro(Vehiculo vehiculo, String usuario) {
+	public Registro(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
-		this.usuario = usuario;
 		this.fechaEntrada = new Date();
 		this.fechaRegistro = new Date();
 	}
@@ -70,14 +65,6 @@ public class Registro {
 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 }
