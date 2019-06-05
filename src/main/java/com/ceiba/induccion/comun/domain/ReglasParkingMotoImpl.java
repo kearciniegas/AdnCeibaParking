@@ -8,8 +8,8 @@ public class ReglasParkingMotoImpl implements ReglasParking {
 
 	public static final int MAX_MOTOS_PARQUEADERO = 10;
 	public static final double PRECIO_MOTO_HORA = 500;
-	public static final double PRECIO_MOTO_DIA = 4000;
-	private static final double PRECIO_ADICIONAL_CILINDRAJE = 2000;
+	public static final double PRECIO_MOTO_DIA = 4_000;
+	private static final double PRECIO_ADICIONAL_CILINDRAJE = 2_000;
 	private static final long MIN_HORAS_COBRO = 1;
 	private static final long HORAS_MIN_PARQUEADERO_DIA = 8;
 	private static final long HORAS_MAX_DIA_MOTO = 24;

@@ -15,7 +15,7 @@ public class RegistrarEntradaVehiculos {
 	ActividadesVigilante procesos;
 
 	public Registro execute(Vehiculo vehiculo) {
-		return procesos.registrarIngreso(vehiculo);
+		return procesos.registrarEntrada(vehiculo);
 	}
 
 }

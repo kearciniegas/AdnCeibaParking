@@ -22,6 +22,10 @@ public class ActividadesVigilanteImpl implements ActividadesVigilante {
 	public static final String SMS_ERROR_NO_ESPACIO = "El parqueadero no cuenta con espacios para guardar el vehiculo";
 	public static final String SMS_ERROR_YA_ESTACIONADO = "El vehiculo ya esta parqueado";
 
+
+	@Autowired
+	private ReglasParkingImpl reglasParking;
+	
 	@Autowired
 	private SavePagoService savePagoService;
 
@@ -31,11 +35,9 @@ public class ActividadesVigilanteImpl implements ActividadesVigilante {
 	@Autowired
 	private GetRegistroService getRegistroService;
 
-	@Autowired
-	private ReglasParkingImpl reglasParking;
 
 	@Override
-	public Registro registrarIngreso(Vehiculo vehiculo) {
+	public Registro registrarEntrada(Vehiculo vehiculo) {
 		if (reglasParking.validarSiExisteRestriccion(vehiculo.getPlaca())) {
 			throw new Excepciones(SMS_ERROR_NO_PUEDE_INGRESO_ENTRE_SEMANA);
 		}
@@ -60,7 +62,7 @@ public class ActividadesVigilanteImpl implements ActividadesVigilante {
 	@Override
 	public Pago registrarSalida(long idRegistro) {
 		Registro registro = getRegistroService.findById(idRegistro);
-		registro.setFechaEntrada(new Date());
+		registro.setFechaSalida(new Date());
 		getRegistroService.save(registro);
 
 		double costoCalculado = reglasParking.ejecutarCalculo(registro);

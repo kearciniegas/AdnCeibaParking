@@ -6,7 +6,7 @@ import com.ceiba.induccion.comun.domain.entity.Vehiculo;
 
 public interface ActividadesVigilante {
 
-	Registro registrarIngreso(Vehiculo vehiculo);
+	Registro registrarEntrada(Vehiculo vehiculo);
 
 	Pago registrarSalida(long idRegistro);
 }
