@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 import com.ceiba.induccion.comun.domain.entity.TipoVehiculo;
 
-@Entity
+@Entity(name = "vehiculo")
 public class VehiculoEntity {
 
 	@Id
@@ -30,23 +30,18 @@ public class VehiculoEntity {
 	private long cilindraje;
 
 	@Column
-	private String usuarioRegistro;
-
-	@Column
 	private Date fechaRegistro;
 
 	public VehiculoEntity() {
 		super();
 	}
 
-	public VehiculoEntity(long id, String placa, TipoVehiculo tipo, long cilindraje, String usuarioRegistro,
-			Date fechaRegistro) {
+	public VehiculoEntity(long id, String placa, TipoVehiculo tipo, long cilindraje, Date fechaRegistro) {
 		super();
 		this.id = id;
 		this.placa = placa;
 		this.tipo = tipo;
 		this.cilindraje = cilindraje;
-		this.usuarioRegistro = usuarioRegistro;
 		this.fechaRegistro = fechaRegistro;
 	}
 
@@ -80,14 +75,6 @@ public class VehiculoEntity {
 
 	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
-	}
-
-	public String getUsuarioRegistro() {
-		return usuarioRegistro;
-	}
-
-	public void setUsuarioRegistro(String usuarioRegistro) {
-		this.usuarioRegistro = usuarioRegistro;
 	}
 
 	public Date getFechaRegistro() {

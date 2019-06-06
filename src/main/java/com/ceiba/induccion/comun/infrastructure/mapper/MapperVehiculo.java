@@ -8,10 +8,12 @@ import com.ceiba.induccion.comun.infrastructure.entity.VehiculoEntity;
 @Component
 public class MapperVehiculo {
 	public Vehiculo mapToDomain(VehiculoEntity vehiculoEntity) {
-		return new Vehiculo(vehiculoEntity.getId(), vehiculoEntity.getPlaca(), vehiculoEntity.getTipo(), vehiculoEntity.getCilindraje(), vehiculoEntity.getFechaRegistro());
+		return new Vehiculo(vehiculoEntity.getId(), vehiculoEntity.getPlaca(), vehiculoEntity.getTipo(),
+				vehiculoEntity.getCilindraje(), vehiculoEntity.getFechaRegistro());
 	}
 
 	public VehiculoEntity mapToEntity(Vehiculo vehiculo) {
-		return new VehiculoEntity(vehiculo.getId(), vehiculo.getPlaca(), vehiculo.getTipoVehiculo(), vehiculo.getCilindraje(), null, vehiculo.getFechaRegistro());
+		return new VehiculoEntity(vehiculo.getId(), vehiculo.getPlaca(), vehiculo.getTipoVehiculo(),
+				vehiculo.getCilindraje(), vehiculo.getFechaRegistro());
 	}
 }

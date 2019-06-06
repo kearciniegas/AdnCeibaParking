@@ -1,9 +1,11 @@
 package com.ceiba.induccion.comun.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ceiba.induccion.comun.domain.entity.Registro;
 
+@Component("moto")
 public class ReglasParkingMotoImpl implements ReglasParking {
 
 	public static final int MAX_MOTOS_PARQUEADERO = 10;

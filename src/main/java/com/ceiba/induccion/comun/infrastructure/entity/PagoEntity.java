@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity(name = "pago")
 public class PagoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

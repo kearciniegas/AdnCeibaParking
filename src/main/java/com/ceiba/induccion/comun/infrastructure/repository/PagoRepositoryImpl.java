@@ -1,6 +1,7 @@
 package com.ceiba.induccion.comun.infrastructure.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.ceiba.induccion.comun.domain.entity.Pago;
@@ -12,6 +13,7 @@ import com.ceiba.induccion.comun.infrastructure.mapper.MapperPago;
 public class PagoRepositoryImpl implements SavePagoService {
 
 	@Autowired
+	@Lazy
 	private PagoRepository pagoRepository;
 
 	@Autowired

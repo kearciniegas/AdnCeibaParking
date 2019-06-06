@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "registro")
 public class RegistroEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,9 +26,6 @@ public class RegistroEntity {
 
 	@Column
 	private Date fin;
-
-	@Column
-	private String usuarioRegistro;
 
 	@Column
 	private Date fechaRegistro;

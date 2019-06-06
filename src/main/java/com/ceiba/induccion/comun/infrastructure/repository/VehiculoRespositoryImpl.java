@@ -1,6 +1,7 @@
 package com.ceiba.induccion.comun.infrastructure.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.ceiba.induccion.comun.domain.entity.Vehiculo;
@@ -12,6 +13,7 @@ import com.ceiba.induccion.comun.infrastructure.mapper.MapperVehiculo;
 public class VehiculoRespositoryImpl implements SaveVehiculoService{
 
 	@Autowired
+	@Lazy
 	private VehiculoRepository vehiculoRepository;
 
 	@Autowired

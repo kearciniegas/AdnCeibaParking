@@ -19,7 +19,7 @@ public class MapperRegistro {
 				registro.getFechaEntrada(), registro.getFechaSalida(), registro.getFechaRegistro());
 	}
 
-	public Registro mapToDomain(RegistroEntity registroEntity){
+	public Registro mapToDomain(RegistroEntity registroEntity) {
 		return new Registro(registroEntity.getId(), mapperVehiculo.mapToDomain(registroEntity.getVehiculo()),
 				registroEntity.getInicio(), registroEntity.getFin(), registroEntity.getFechaRegistro());
 	}
@@ -28,15 +28,11 @@ public class MapperRegistro {
 		List<Registro> listaRegistro = new ArrayList<>();
 		listaEntidad.forEach(registroEntity -> {
 			Registro registro = new Registro(registroEntity.getId(),
-						mapperVehiculo.mapToDomain(registroEntity.getVehiculo()),registroEntity.getInicio(),registroEntity.getFin(), registroEntity.getFechaRegistro());
+					mapperVehiculo.mapToDomain(registroEntity.getVehiculo()), registroEntity.getInicio(),
+					registroEntity.getFin(), registroEntity.getFechaRegistro());
 			listaRegistro.add(registro);
 		});
 		return listaRegistro;
 	}
-	
-	
 
-
-
-	
 }

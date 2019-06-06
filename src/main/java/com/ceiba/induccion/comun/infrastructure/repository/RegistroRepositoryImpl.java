@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.ceiba.induccion.comun.domain.entity.Registro;
@@ -18,6 +19,7 @@ public class RegistroRepositoryImpl implements GetRegistroService {
 	private static final int VEHICULOS_CERO = 0;
 
 	@Autowired
+	@Lazy
 	private RegistroRepository registroRepo;
 
 	@Autowired

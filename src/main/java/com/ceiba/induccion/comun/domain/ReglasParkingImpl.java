@@ -15,8 +15,8 @@ import com.ceiba.induccion.comun.domain.entity.TipoVehiculo;
 public class ReglasParkingImpl {
 	public static final char RESTRICCION_DE_LETRA_PLACA = 'A';
 
-	@Resource
-	private ReglasParkingMotoImpl reglasParkingMotoImpl;
+	@Resource(name = "moto")
+	private ReglasParking moto;
 
 	@Autowired
 	private WatchfulImpl watchfulImpl;
@@ -24,8 +24,7 @@ public class ReglasParkingImpl {
 	public boolean validarSiHayEspacio(TipoVehiculo tipoVehiculo, int numeroVehiculos) {
 		boolean espacio = false;
 		if (tipoVehiculo == TipoVehiculo.MOTO) {
-			// TODO:FALTA AGREGAR UN ELSE CON LA VALIDACION DEL CARRO
-			espacio = reglasParkingMotoImpl.existeEspacio(numeroVehiculos);
+			espacio = moto.existeEspacio(numeroVehiculos);
 		}
 		return espacio;
 	}
@@ -33,8 +32,7 @@ public class ReglasParkingImpl {
 	public Double ejecutarCalculo(Registro registro) {
 		Double costo = null;
 		if (registro != null && registro.getVehiculo().getTipoVehiculo() == TipoVehiculo.MOTO) {
-			// TODO:FALTA AGREGAR UN ELSE CON LA VALIDACION DEL CARRO
-			costo = reglasParkingMotoImpl.calcularPago(registro);
+			costo = moto.calcularPago(registro);
 		}
 		return costo;
 	}

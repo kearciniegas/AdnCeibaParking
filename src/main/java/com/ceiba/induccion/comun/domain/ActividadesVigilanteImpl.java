@@ -3,6 +3,7 @@ package com.ceiba.induccion.comun.domain;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,16 +24,18 @@ public class ActividadesVigilanteImpl implements ActividadesVigilante {
 	public static final String SMS_ERROR_YA_ESTACIONADO = "El vehiculo ya esta parqueado";
 
 
-	@Autowired
+	@Autowired(required=true)
 	private ReglasParkingImpl reglasParking;
 	
-	@Autowired
+	@Autowired(required=true)
+	@Lazy
 	private SavePagoService savePagoService;
 
-	@Autowired
+	@Autowired(required=true)
 	private SaveVehiculoService saveVehiculoService;
 
-	@Autowired
+	@Autowired(required=true)
+	@Lazy
 	private GetRegistroService getRegistroService;
 
 
@@ -65,7 +68,7 @@ public class ActividadesVigilanteImpl implements ActividadesVigilante {
 		registro.setFechaSalida(new Date());
 		getRegistroService.save(registro);
 
-		double costoCalculado = reglasParking.ejecutarCalculo(registro);
+		Double costoCalculado = reglasParking.ejecutarCalculo(registro);
 		Pago pago = new Pago(costoCalculado, registro);
 		return savePagoService.save(pago);
 	}
