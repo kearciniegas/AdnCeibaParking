@@ -6,14 +6,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.induccion.comun.domain.ReglasParkingMotoImpl;
-import com.ceiba.induccion.comun.domain.WatchfulImpl;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,12 +20,8 @@ public class ReglasParkingMotoTest {
 	@InjectMocks
 	private ReglasParkingMotoImpl reglasParkingMoto;
 
-	@Spy
-	private WatchfulImpl watchfulImpl;
-
 	private static final int MOTOS_EN_PARQUEADERO_PARCIAL = 7;
-	public static final int MAX_MOTOS_PARQUEADERO = 10;
-
+	public static final int MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO = 11;
 
 	@Before
 	public void setup() {
@@ -51,7 +44,7 @@ public class ReglasParkingMotoTest {
 		// arrange
 
 		// act
-		boolean resultado = reglasParkingMoto.existeEspacio(MAX_MOTOS_PARQUEADERO);
+		boolean resultado = reglasParkingMoto.existeEspacio(MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO);
 
 		// assert
 		Assert.assertFalse(resultado);
