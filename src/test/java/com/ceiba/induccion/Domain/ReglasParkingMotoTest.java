@@ -10,7 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ceiba.induccion.comun.domain.ReglasParkingMotoImpl;
+import com.ceiba.induccion.domain.RulesParkingMotoImpl;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,7 +19,7 @@ import com.ceiba.induccion.comun.domain.ReglasParkingMotoImpl;
 public class ReglasParkingMotoTest {
 
 	@InjectMocks
-	private ReglasParkingMotoImpl reglasParkingMoto;
+	private RulesParkingMotoImpl rulesParkingMotoImpl;
 
 	private static final int MOTOS_EN_PARQUEADERO_PARCIAL = 7;
 	public static final int MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO = 11;
@@ -33,7 +34,7 @@ public class ReglasParkingMotoTest {
 		// arrange
 
 		// act
-		boolean resultado = reglasParkingMoto.existeEspacio(MOTOS_EN_PARQUEADERO_PARCIAL);
+		boolean resultado = rulesParkingMotoImpl.existeEspacio(MOTOS_EN_PARQUEADERO_PARCIAL);
 
 		// assert
 		Assert.assertTrue(resultado);
@@ -44,7 +45,7 @@ public class ReglasParkingMotoTest {
 		// arrange
 
 		// act
-		boolean resultado = reglasParkingMoto.existeEspacio(MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO);
+		boolean resultado = rulesParkingMotoImpl.existeEspacio(MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO);
 
 		// assert
 		Assert.assertFalse(resultado);
