@@ -36,7 +36,7 @@ public class RulesParkingMotoImpl implements RulesParking {
 			costo += PRECIO_MOTO_DIA;
 		}
 
-		if (registry.getVehiculo().getCilindraje() > CILINDRAJE_MAX_MOTO) {
+		if (registry.getCilindraje() > CILINDRAJE_MAX_MOTO) {
 			costo += PRECIO_ADICIONAL_CILINDRAJE;
 		}
 

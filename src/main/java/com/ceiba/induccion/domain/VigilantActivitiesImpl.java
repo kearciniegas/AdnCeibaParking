@@ -9,11 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.induccion.domain.entity.Payment;
 import com.ceiba.induccion.domain.entity.Registry;
-import com.ceiba.induccion.domain.entity.Vehicle;
 import com.ceiba.induccion.domain.exception.Exceptions;
 import com.ceiba.induccion.domain.ports.GetPortRegistration;
 import com.ceiba.induccion.domain.ports.PaymentPort;
-import com.ceiba.induccion.domain.ports.VehiclePort;
 
 @Transactional
 @Service
@@ -30,34 +28,31 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 	@Lazy
 	private PaymentPort paymentPort;
 
-	@Autowired(required = true)
-	private VehiclePort vehiclePort;
 
 	@Autowired(required = true)
 	@Lazy
 	private GetPortRegistration getPortRegistration;
 
 	@Override
-	public Registry registrarEntrada(Vehicle vehicle) {
-		if (reglasParking.validarSiExisteRestriccion(vehicle.getPlaca())) {
+	public Registry registrarEntrada(Registry registry) {
+		if (reglasParking.validarSiExisteRestriccion(registry.getPlaca())) {
 			throw new Exceptions(SMS_ERROR_NO_PUEDE_INGRESO_ENTRE_SEMANA);
 		}
 
-		int numeroVehiculos = getPortRegistration.contarVehiculosEstacionados(vehicle.getVehicleType());
-		if (!reglasParking.validarSiHayEspacio(vehicle.getVehicleType(), numeroVehiculos)) {
+		int numeroVehiculos = getPortRegistration.contarVehiculosEstacionados(registry.getVehicleType());
+		if (!reglasParking.validarSiHayEspacio(registry.getVehicleType(), numeroVehiculos)) {
 			throw new Exceptions(SMS_ERROR_NO_ESPACIO);
 		}
 
-		if (getPortRegistration.existeVehiculoEnEstacionamiento(vehicle.getPlaca())) {
+		if (getPortRegistration.existeVehiculoEnEstacionamiento(registry.getPlaca())) {
 			throw new Exceptions(SMS_ERROR_YA_ESTACIONADO);
 		}
 
-		vehicle.setFechaRegistro(new Date());
-		vehicle = vehiclePort.save(vehicle);
+		registry.setFechaRegistro(new Date());
 
-		Registry registry = new Registry(vehicle);
-		registry = getPortRegistration.save(registry);
-		return registry;
+		Registry registry1 = new Registry(registry);
+		registry1 = getPortRegistration.save(registry);
+		return registry1;
 	}
 
 	@Override

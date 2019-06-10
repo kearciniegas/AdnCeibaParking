@@ -4,22 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import com.ceiba.induccion.domain.entity.VehicleType;
 
 @Entity(name = "registro")
 public class RegistryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
-
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "vehiculo")
-	private VehicleEntity vehicleEntity;
 
 	@Column(nullable = false)
 	private Date inicio;
@@ -29,14 +26,26 @@ public class RegistryEntity {
 
 	@Column
 	private Date fechaRegistro;
+	
+	@Column(nullable = false)
+	private String placa;
 
-	public RegistryEntity(long id, VehicleEntity vehicleEntity, Date inicio, Date fin, Date fechaRegistro) {
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private VehicleType vehicleType;
+
+	@Column
+	private long cilindraje;
+
+	public RegistryEntity(long id,  Date inicio, Date fin, Date fechaRegistro,String placa,VehicleType vehicleType,long cilindraje) {
 		super();
 		this.id = id;
-		this.vehicleEntity = vehicleEntity;
 		this.inicio = inicio;
 		this.fin = fin;
 		this.fechaRegistro = fechaRegistro;
+		this.placa = placa;
+		this.vehicleType = vehicleType;
+		this.cilindraje = cilindraje;
 	}
 
 	public long getId() {
@@ -45,14 +54,6 @@ public class RegistryEntity {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public VehicleEntity getVehicleEntity() {
-		return vehicleEntity;
-	}
-
-	public void setVehicleEntity(VehicleEntity vehicleEntity) {
-		this.vehicleEntity = vehicleEntity;
 	}
 
 	public Date getInicio() {
@@ -78,4 +79,29 @@ public class RegistryEntity {
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	public long getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(long cilindraje) {
+		this.cilindraje = cilindraje;
+	}
+	
 }

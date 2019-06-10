@@ -16,10 +16,10 @@ import com.ceiba.induccion.infrastructure.entity.RegistryEntity;
 @Repository
 public interface RegistryRepository extends CrudRepository<RegistryEntity, Long> {
 
-	@Query("SELECT COUNT(r) FROM registro r WHERE r.vehicleEntity.vehicleType = :vehicleType AND fin is null")
+	@Query("SELECT COUNT(r) FROM registro r WHERE r.vehicleType = :vehicleType AND fin is null")
 	int contarVehiculosEstacionados(@Param("vehicleType") VehicleType vehicleType);
 
-	@Query("SELECT COUNT(r) FROM registro r WHERE r.vehicleEntity.placa = :placa AND fin is null")
+	@Query("SELECT COUNT(r) FROM registro r WHERE r.placa = :placa AND fin is null")
 	int contarVehiculosEstacionadosConPlaca(@Param("placa") String placa);
 
 	List<RegistryEntity> findByFinIsNull();

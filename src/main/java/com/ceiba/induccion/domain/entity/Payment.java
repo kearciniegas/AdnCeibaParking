@@ -2,6 +2,7 @@ package com.ceiba.induccion.domain.entity;
 
 import java.util.Date;
 
+
 public class Payment {
 
 	private long id;

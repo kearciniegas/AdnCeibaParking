@@ -32,7 +32,7 @@ public class RulesParkingImpl {
 
 	public Double ejecutarCalculo(Registry registry) {
 		Double costo = null;
-		if (registry != null && registry.getVehiculo().getVehicleType() == VehicleType.MOTO) {
+		if (registry != null && registry.getVehicleType() == VehicleType.MOTO) {
 			costo = moto.calcularPago(registry);
 		}
 		return costo;

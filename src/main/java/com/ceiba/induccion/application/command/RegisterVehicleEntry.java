@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.induccion.domain.VigilantActivities;
 import com.ceiba.induccion.domain.entity.Registry;
-import com.ceiba.induccion.domain.entity.Vehicle;
 
 
 @Service
@@ -15,8 +14,8 @@ public class RegisterVehicleEntry {
 	@Autowired
 	VigilantActivities vigilantActivities;
 
-	public Registry execute(Vehicle vehicle) {
-		return vigilantActivities.registrarEntrada(vehicle);
+	public Registry execute(Registry registry) {
+		return vigilantActivities.registrarEntrada(registry);
 	}
 
 }
