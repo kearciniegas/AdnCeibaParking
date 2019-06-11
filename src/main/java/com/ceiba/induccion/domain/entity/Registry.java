@@ -23,10 +23,9 @@ public class Registry {
 		
 	}
 
-	public Registry(Registry registry) {
-		// TODO Auto-generated constructor stub
+	public Registry() {
+		
 	}
-
 	public long getId() {
 		return id;
 	}

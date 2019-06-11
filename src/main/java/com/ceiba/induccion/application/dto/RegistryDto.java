@@ -1,13 +1,18 @@
 package com.ceiba.induccion.application.dto;
 
-public class VehicleDto {
+import java.util.Date;
+
+public class RegistryDto {
 
 	private long id;
+	private Date fechaEntrada;
+	private Date fechaRegistro;
+
 	private String placa;
 	private String tipo;
 	private long cilindraje;
 
-	public VehicleDto() {
+	public RegistryDto() {
 		super();
 	}
 
@@ -42,5 +47,23 @@ public class VehicleDto {
 	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
 	}
+
+	public Date getFechaEntrada() {
+		return fechaEntrada;
+	}
+
+	public void setFechaEntrada(Date fechaEntrada) {
+		this.fechaEntrada = fechaEntrada;
+	}
+
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	
 
 }

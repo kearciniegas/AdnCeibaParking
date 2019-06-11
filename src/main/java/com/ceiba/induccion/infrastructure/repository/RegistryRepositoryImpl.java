@@ -54,6 +54,6 @@ public class RegistryRepositoryImpl implements GetPortRegistration {
 
 	@Override
 	public List<Registry> listaVehiculosEstacionados() {
-		return mapperRegistry.mapToDomain(registryRepository.findByFinIsNull());
+		return mapperRegistry.mapToDomain(registryRepository.findAll());
 	}
 }

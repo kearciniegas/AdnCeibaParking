@@ -28,7 +28,6 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 	@Lazy
 	private PaymentPort paymentPort;
 
-
 	@Autowired(required = true)
 	@Lazy
 	private GetPortRegistration getPortRegistration;
@@ -47,12 +46,8 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 		if (getPortRegistration.existeVehiculoEnEstacionamiento(registry.getPlaca())) {
 			throw new Exceptions(SMS_ERROR_YA_ESTACIONADO);
 		}
-
 		registry.setFechaRegistro(new Date());
-
-		Registry registry1 = new Registry(registry);
-		registry1 = getPortRegistration.save(registry);
-		return registry1;
+		return registry;
 	}
 
 	@Override

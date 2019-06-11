@@ -37,6 +37,9 @@ public class RegistryEntity {
 	@Column
 	private long cilindraje;
 
+	public RegistryEntity() {
+	}
+
 	public RegistryEntity(long id,  Date inicio, Date fin, Date fechaRegistro,String placa,VehicleType vehicleType,long cilindraje) {
 		super();
 		this.id = id;
