@@ -23,9 +23,6 @@ public class RegistryEntity {
 
 	@Column
 	private Date fin;
-
-	@Column
-	private Date fechaRegistro;
 	
 	@Column(nullable = false)
 	private String placa;
@@ -40,12 +37,11 @@ public class RegistryEntity {
 	public RegistryEntity() {
 	}
 
-	public RegistryEntity(long id,  Date inicio, Date fin, Date fechaRegistro,String placa,VehicleType vehicleType,long cilindraje) {
+	public RegistryEntity(long id,  Date inicio, Date fin,String placa,VehicleType vehicleType,long cilindraje) {
 		super();
 		this.id = id;
 		this.inicio = inicio;
 		this.fin = fin;
-		this.fechaRegistro = fechaRegistro;
 		this.placa = placa;
 		this.vehicleType = vehicleType;
 		this.cilindraje = cilindraje;
@@ -73,14 +69,6 @@ public class RegistryEntity {
 
 	public void setFin(Date fin) {
 		this.fin = fin;
-	}
-
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
 	}
 
 	public String getPlaca() {

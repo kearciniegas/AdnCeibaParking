@@ -1,7 +1,7 @@
 pipeline{
 	
 		agent {
-		label 'Slave5'
+		label 'ceiba_induccion'
 		}
 	
         

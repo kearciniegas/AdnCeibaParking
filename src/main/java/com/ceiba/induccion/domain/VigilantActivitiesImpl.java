@@ -46,7 +46,8 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 		if (getPortRegistration.existeVehiculoEnEstacionamiento(registry.getPlaca())) {
 			throw new Exceptions(SMS_ERROR_YA_ESTACIONADO);
 		}
-		registry.setFechaRegistro(new Date());
+		registry.setFechaEntrada(new Date());
+		getPortRegistration.save(registry);
 		return registry;
 	}
 

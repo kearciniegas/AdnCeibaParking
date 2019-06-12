@@ -20,34 +20,32 @@ import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
 
 
-
 @RestController
 @RequestMapping("registros")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RegistryController {
-	@Autowired
-	private RegisterVehiclesExit registerVehiclesExit;
+    @Autowired
+    private RegisterVehiclesExit registerVehiclesExit;
 
-	@Autowired
-	private QueryAllVehicle allVehicle;
-	
-	@Autowired	
-	private RegisterVehicleEntry registerVehicleEntryCommad;
-	
-	@PostMapping(value="entrada")
-	public Registry registrarIngreso(@RequestBody RegistryDto registryDto) {	
-		return registerVehicleEntryCommad.execute(new Registry(registryDto.getId(), registryDto.getFechaEntrada(), registryDto.getFechaRegistro(), null, registryDto.getPlaca(),	
-				VehicleType.valueOf(registryDto.getTipo()), registryDto.getCilindraje()));	
-	}
+    @Autowired
+    private QueryAllVehicle allVehicle;
 
-	@PatchMapping(value="salida")
-	public Payment registrarSalida(long idRegistro) {
-		return registerVehiclesExit.execute(idRegistro);
-	}
+    @Autowired
+    private RegisterVehicleEntry registerVehicleEntryCommad;
 
-	@GetMapping(value="lista")
-	public List<Registry> listar() {
-		return allVehicle.execute();
-	}
+    @PostMapping(value = "entrada")
+    public Registry registrarIngreso(@RequestBody RegistryDto registryDto) {
+        return registerVehicleEntryCommad.execute(new Registry(registryDto.getPlaca(), VehicleType.valueOf(registryDto.getTipo()), registryDto.getCilindraje()));
+    }
+
+    @PatchMapping(value = "salida")
+    public Payment registrarSalida(long idRegistro) {
+        return registerVehiclesExit.execute(idRegistro);
+    }
+
+    @GetMapping(value = "lista")
+    public List<Registry> listar() {
+        return allVehicle.execute();
+    }
 
 }

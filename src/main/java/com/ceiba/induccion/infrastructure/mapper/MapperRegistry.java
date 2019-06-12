@@ -11,26 +11,22 @@ import com.ceiba.induccion.infrastructure.entity.RegistryEntity;
 @Component
 public class MapperRegistry {
 
-	public RegistryEntity mapToEntity(Registry registry) {
-		return new RegistryEntity(registry.getId(), registry.getFechaEntrada(), registry.getFechaSalida(),
-				registry.getFechaRegistro(), registry.getPlaca(), registry.getVehicleType(), registry.getCilindraje());
-	}
+    public RegistryEntity mapToEntity(Registry registry) {
+        return new RegistryEntity(registry.getId(), registry.getFechaEntrada(), registry.getFechaSalida(), registry.getPlaca(), registry.getVehicleType(), registry.getCilindraje());
+    }
 
-	public Registry mapToDomain(RegistryEntity registryEntity) {
-		return new Registry(registryEntity.getId(), registryEntity.getInicio(), registryEntity.getFin(),
-				registryEntity.getFechaRegistro(), registryEntity.getPlaca(), registryEntity.getVehicleType(),
-				registryEntity.getCilindraje());
-	}
+    public Registry mapToDomain(RegistryEntity registryEntity) {
+        return new Registry(registryEntity.getId(), registryEntity.getInicio(), registryEntity.getFin(), registryEntity.getPlaca(), registryEntity.getVehicleType(),
+                registryEntity.getCilindraje());
+    }
 
-	public List<Registry> mapToDomain(Iterable<RegistryEntity> listaEntidad) {
-		List<Registry> listaRegistro = new ArrayList<>();
-		listaEntidad.forEach(registryEntity -> {
-			Registry registry = new Registry(registryEntity.getId(), registryEntity.getInicio(),
-					registryEntity.getFin(), registryEntity.getFechaRegistro(),
-					registryEntity.getPlaca(), registryEntity.getVehicleType(), registryEntity.getCilindraje());
-			listaRegistro.add(registry);
-		});
-		return listaRegistro;
-	}
+    public List<Registry> mapToDomain(Iterable<RegistryEntity> listaEntidad) {
+        List<Registry> listaRegistro = new ArrayList<>();
+        listaEntidad.forEach(registryEntity -> {
+            Registry registry = new Registry(registryEntity.getId(), registryEntity.getInicio(), registryEntity.getFin(), registryEntity.getPlaca(), registryEntity.getVehicleType(), registryEntity.getCilindraje());
+            listaRegistro.add(registry);
+        });
+        return listaRegistro;
+    }
 
 }

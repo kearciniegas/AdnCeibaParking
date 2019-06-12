@@ -2,6 +2,7 @@ package com.ceiba.induccion.infrastructure.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,4 +24,7 @@ public interface RegistryRepository extends CrudRepository<RegistryEntity, Long>
 	int contarVehiculosEstacionadosConPlaca(@Param("placa") String placa);
 
 	List<RegistryEntity> findAll();
+
+	@Override
+	Optional<RegistryEntity> findById(Long aLong);
 }

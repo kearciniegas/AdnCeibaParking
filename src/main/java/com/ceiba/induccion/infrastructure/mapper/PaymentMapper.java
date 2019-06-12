@@ -7,15 +7,13 @@ import com.ceiba.induccion.domain.entity.Payment;
 import com.ceiba.induccion.infrastructure.entity.PaymentEntity;
 
 
-
 @Component
 public class PaymentMapper {
 
-	@Autowired
-	private MapperRegistry mapperRegistry;
+    @Autowired
+    private MapperRegistry mapperRegistry;
 
-	public PaymentEntity mapToEntity(Payment payment) {
-		return new PaymentEntity(payment.getId(), payment.getValor(), mapperRegistry.mapToEntity(payment.getRegistry()),
-				payment.getFechaRegistro());
-	}
+    public PaymentEntity mapToEntity(Payment payment) {
+        return new PaymentEntity(payment.getId(), payment.getValor(), mapperRegistry.mapToEntity(payment.getRegistry()));
+    }
 }

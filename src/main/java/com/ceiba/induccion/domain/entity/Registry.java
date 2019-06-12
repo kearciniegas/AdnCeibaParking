@@ -6,26 +6,32 @@ public class Registry {
 	private long id;
 	private Date fechaEntrada;
 	private Date fechaSalida;
-	private Date fechaRegistro;
 	private String placa;
 	private VehicleType vehicleType;
 	private long cilindraje;
 
-	public Registry(long id,  Date fechaEntrada, Date fechaSalida, Date fechaRegistro,String placa, VehicleType vehicleType, long cilindraje) {
+	public Registry(long id, Date fechaEntrada, Date fechaSalida, String placa, VehicleType vehicleType,
+			long cilindraje) {
 		super();
 		this.id = id;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaSalida;
-		this.fechaRegistro = fechaRegistro;
 		this.placa = placa;
 		this.vehicleType = vehicleType;
 		this.cilindraje = cilindraje;
-		
+
 	}
 
 	public Registry() {
-		
+
 	}
+
+	public Registry(String placa, VehicleType vehicleType, long cilindraje) {
+		this.placa = placa;
+		this.vehicleType = vehicleType;
+		this.cilindraje = cilindraje;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -48,14 +54,6 @@ public class Registry {
 
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-	}
-
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
 	}
 
 	public String getPlaca() {
@@ -81,7 +79,5 @@ public class Registry {
 	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
 	}
-	
-	
 
 }

@@ -4,24 +4,14 @@ import java.util.Date;
 
 public class RegistryDto {
 
-	private long id;
-	private Date fechaEntrada;
-	private Date fechaRegistro;
-
 	private String placa;
 	private String tipo;
 	private long cilindraje;
+	
+	
 
 	public RegistryDto() {
 		super();
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getPlaca() {
@@ -48,22 +38,5 @@ public class RegistryDto {
 		this.cilindraje = cilindraje;
 	}
 
-	public Date getFechaEntrada() {
-		return fechaEntrada;
-	}
-
-	public void setFechaEntrada(Date fechaEntrada) {
-		this.fechaEntrada = fechaEntrada;
-	}
-
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
-	}
-
-	
 
 }

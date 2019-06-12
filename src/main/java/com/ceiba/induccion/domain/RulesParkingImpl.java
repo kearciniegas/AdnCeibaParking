@@ -18,6 +18,9 @@ public class RulesParkingImpl {
 	@Resource(name = "moto")
 	private RulesParking moto;
 
+	@Resource(name= "carro")
+	private RulesParking carro;
+
 	@Autowired
 	private VigilantImpl vigilantImpl;
 
@@ -25,6 +28,8 @@ public class RulesParkingImpl {
 		boolean espacio = false;
 		if (vehicleType == VehicleType.MOTO) {
 			espacio = moto.existeEspacio(numeroVehiculos);
+		}else{
+			espacio = carro.existeEspacio(numeroVehiculos);
 		}
 
 		return espacio;
@@ -34,6 +39,8 @@ public class RulesParkingImpl {
 		Double costo = null;
 		if (registry != null && registry.getVehicleType() == VehicleType.MOTO) {
 			costo = moto.calcularPago(registry);
+		}else{
+			costo = carro.calcularPago(registry);
 		}
 		return costo;
 	}

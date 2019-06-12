@@ -23,8 +23,8 @@ public class PaymentRepositoryImpl implements PaymentPort {
 
 	@Override
 	public Payment save(Payment payment) {
-		PaymentEntity pagoEntity = paymentRepository.save(paymentMapper.mapToEntity(payment));
-		payment.setId(pagoEntity.getId());
+		PaymentEntity paymentEntity = paymentRepository.save(paymentMapper.mapToEntity(payment));
+		payment.setId(paymentEntity.getId());
 		return payment;
 	}
 }

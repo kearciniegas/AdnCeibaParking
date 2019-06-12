@@ -4,7 +4,7 @@ import com.ceiba.induccion.domain.entity.Registry;
 
 public interface RulesParking {
 
-	double calcularPago(Registry registro);
+	double calcularPago(Registry registry);
 
 	boolean existeEspacio(int numero);
 }
