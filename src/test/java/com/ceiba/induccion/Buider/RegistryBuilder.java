@@ -6,7 +6,6 @@ import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
 
 public class RegistryBuilder {
-	private long id;
 	private Date fechaEntrada;
 	private Date fechaSalida;
 	private String placa;
@@ -19,11 +18,6 @@ public class RegistryBuilder {
 	
 	public static RegistryBuilder defaultValues() {
 		return new RegistryBuilder();
-	}
-	
-	public RegistryBuilder conId(long id) {
-		this.id = id;
-		return this;
 	}
 	
 	public RegistryBuilder conPlaca(String placa) {
@@ -52,6 +46,6 @@ public class RegistryBuilder {
 	}
 	
 	public Registry build() {
-		return new Registry(id, fechaEntrada, fechaSalida, placa, vehicleType, cilindraje);
+		return new Registry(0, fechaEntrada, fechaSalida, placa, vehicleType, cilindraje);
 	}
 }
