@@ -59,7 +59,7 @@ public class ServiceVigilantTest {
 
 		// assert
 		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registroAlmacenado.getPlaca());
-		Assert.assertEquals(VehicleType.MOTO, registroAlmacenado.getVehicleType());*/
-	}
+		Assert.assertEquals(VehicleType.MOTO, registroAlmacenado.getVehicleType());
+	}*/
 
 }
