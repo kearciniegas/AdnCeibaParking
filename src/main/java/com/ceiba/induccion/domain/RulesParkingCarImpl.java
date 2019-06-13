@@ -21,8 +21,8 @@ public class RulesParkingCarImpl implements RulesParking {
     public double calcularPago(Registry registry) {
         double costo = 0;
         long totalHoras = vigilantImpl.hoursBetweenDate(registry.getFechaEntrada(), registry.getFechaSalida());
-        double diasParqueo = (double) totalHoras / HORAS_DIA_CARRO;
-        double horasParqueo = totalHoras % HORAS_DIA_CARRO;
+        long diasParqueo =  totalHoras / HORAS_DIA_CARRO;
+        long horasParqueo = totalHoras % HORAS_DIA_CARRO;
         costo = diasParqueo * VALOR_DIA_CARRO;
         if (horasParqueo < HORAS_MINIMO_COBRO_CARRO) {
             costo = VALOR_HORA_CARRO;

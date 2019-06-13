@@ -31,6 +31,11 @@ public class Registry {
 		this.vehicleType = vehicleType;
 		this.cilindraje = cilindraje;
 	}
+	
+	public Registry(String placa, VehicleType vehicleType ) {
+		this.placa = placa;
+		this.vehicleType = vehicleType;
+	}
 
 	public long getId() {
 		return id;

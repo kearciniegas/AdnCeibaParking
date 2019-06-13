@@ -25,7 +25,7 @@ import com.ceiba.induccion.domain.entity.VehicleType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReglasParkingMotoTest {
+public class RulesParkingMotoTest {
 
 	@InjectMocks
 	private RulesParkingImpl rulesParkingImpl;
@@ -41,7 +41,8 @@ public class ReglasParkingMotoTest {
 	private static final String FECHA_FIN_VEHICULO1 = "12/06/2019 02:00";
 	private static final String FECHA_INICIO_VEHICULO2 = "14/06/2019 01:00";
 	private static final String FECHA_FIN_VEHICULO2 = "14/06/2019 01:30";
-
+	private static final String FECHA_INICIO_VEHICULO3 = "01/06/2019 00:00";
+	private static final String FECHA_FIN_VEHICULO3 = "02/06/2019 01:00";
 	private static final double COSTO_VEHICULO = 4_000;
 	private SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	private static final int MOTOS_EN_PARQUEADERO_PARCIAL = 7;
@@ -51,13 +52,16 @@ public class ReglasParkingMotoTest {
 
 	private static final double COSTO_VEHICULO1 = 6_000;
 	private static final double COSTO_VEHICULO2 = 500;
-	private static final double COSTO_VEHICULO3 = 2500;
+	private static final double COSTO_VEHICULO3 = 2_500;
+	private static final double COSTO_VEHICULO4 = 4_500;
+
+	
 	@InjectMocks
 	private RulesParkingMotoImpl rulesParkingMotoImpl;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(ReglasParkingMotoTest.class);
+		MockitoAnnotations.initMocks(RulesParkingMotoTest.class);
 	}
 
 	@Test
@@ -198,5 +202,24 @@ public class ReglasParkingMotoTest {
 
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO3, costo, 0);
+	}
+	@Test
+	public void costoEstacionamiento1Dia1HoraCilindrajeBajoTest() {
+		// arrange
+		Date fechaEntrada = null;
+		Date fechaSalida = null;
+		try {
+			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO3);
+			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO3);
+		} catch (ParseException e) {
+			fail();
+		}
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
+		// act
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
+
+		// assert
+		Assert.assertEquals(COSTO_VEHICULO4, costo, 0);
 	}
 }
