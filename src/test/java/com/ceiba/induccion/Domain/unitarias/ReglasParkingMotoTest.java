@@ -26,28 +26,27 @@ import com.ceiba.induccion.domain.entity.VehicleType;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ReglasParkingMotoTest {
+
 	@InjectMocks
 	private RulesParkingImpl rulesParkingImpl;
 
 	@Spy
 	private VigilantImpl vigilantImpl;
+
 	private static final String PLACA_MOTO = "LGH156";
 	private static final int CILINDRAJE_MOTO_BAJO = 200;
-	private static final String FECHA_INICIO_VEHICULO = "12/06/2019 07:00";
-	private static final String FECHA_FIN_VEHICULO = "12/06/2019 16:00";
-	private static final String FECHA_INICIO_VEHICULO1 = "12/06/2019 16:00";
-	private static final String FECHA_FIN_VEHICULO1 = "12/06/2019 16:00";
+	private static final String FECHA_INICIO_VEHICULO = "13/06/2019 07:00";
+	private static final String FECHA_FIN_VEHICULO = "13/06/2019 16:00";
+	private static final String FECHA_INICIO_VEHICULO1 = "11/06/2019 16:00";
+	private static final String FECHA_FIN_VEHICULO1 = "12/06/2019 02:00";
 	private static final double COSTO_VEHICULO = 4_000;
 	private SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	private static final int MOTOS_EN_PARQUEADERO_PARCIAL = 7;
 	public static final int MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO = 11;
 
 	private static final int CILINDRAJE_MOTO_ALTO = 500;
-	
-	private static final double COSTO_VEHICULO2 = 6_000;
 
-
-	
+	private static final double COSTO_VEHICULO1 = 6_000;
 
 	@InjectMocks
 	private RulesParkingMotoImpl rulesParkingMotoImpl;
@@ -90,11 +89,10 @@ public class ReglasParkingMotoTest {
 		} catch (ParseException e) {
 			fail();
 		}
-		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada)
-				.conFechaSalida(fechaSalida).conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO)
-				.conCilindraje(CILINDRAJE_MOTO_BAJO).build();
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
 		// act
-		double costo = rulesParkingImpl.ejecutarCalculo(registry);
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
 
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO, costo, 0);
@@ -111,13 +109,12 @@ public class ReglasParkingMotoTest {
 		} catch (ParseException e) {
 			fail();
 		}
-		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada)
-				.conFechaSalida(fechaSalida).conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO)
-				.conCilindraje(CILINDRAJE_MOTO_ALTO).build();
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
 		// act
-		double costo = rulesParkingImpl.ejecutarCalculo(registry);
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
 
 		// assert
-		Assert.assertEquals(COSTO_VEHICULO2, costo, 0);
+		Assert.assertEquals(COSTO_VEHICULO1, costo, 0);
 	}
 }
