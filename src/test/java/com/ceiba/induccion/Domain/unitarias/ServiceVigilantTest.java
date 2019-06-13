@@ -23,7 +23,7 @@ import com.ceiba.induccion.infrastructure.repository.RegistryRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceVigilantTest {
-
+	/*
 	private static final String PLACA_VEHICULO_SIN_RESTRICCION = "NNL677";
 	private static final Integer CILINDRAJE_MOTO = 550;
 	private static final int MOTOS_EN_PARQUEADERO = 3;
@@ -45,7 +45,7 @@ public class ServiceVigilantTest {
 		MockitoAnnotations.initMocks(ServiceVigilantTest.class);
 	}
 
-	/* @Test
+	 @Test
 	public void registrarMotoConCupoTest() {
 		// arrange
 		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION).conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
