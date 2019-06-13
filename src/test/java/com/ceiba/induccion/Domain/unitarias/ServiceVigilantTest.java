@@ -1,6 +1,5 @@
 package com.ceiba.induccion.domain.unitarias;
 
-import static org.hamcrest.CoreMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.Assert;
@@ -24,7 +23,7 @@ import com.ceiba.induccion.infrastructure.repository.RegistryRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceVigilantTest {
-	
+
 	private static final String PLACA_VEHICULO_SIN_RESTRICCION = "NNL677";
 	private static final Integer CILINDRAJE_MOTO = 550;
 	private static final int MOTOS_EN_PARQUEADERO = 3;
@@ -34,7 +33,6 @@ public class ServiceVigilantTest {
 
 	@Mock
 	private RulesParkingImpl reglasEstacionamiento;
-
 
 	@Mock
 	private RegistryRepository registryRepository;
@@ -46,12 +44,11 @@ public class ServiceVigilantTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(ServiceVigilantTest.class);
 	}
-	
-	@Test
+
+	/* @Test
 	public void registrarMotoConCupoTest() {
-	/*	// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
-				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
+		// arrange
+		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION).conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		when(registryRepository.contarVehiculosEstacionados(VehicleType.MOTO)).thenReturn(MOTOS_EN_PARQUEADERO);
 

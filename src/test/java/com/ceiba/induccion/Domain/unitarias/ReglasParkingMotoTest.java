@@ -39,6 +39,9 @@ public class ReglasParkingMotoTest {
 	private static final String FECHA_FIN_VEHICULO = "13/06/2019 16:00";
 	private static final String FECHA_INICIO_VEHICULO1 = "11/06/2019 16:00";
 	private static final String FECHA_FIN_VEHICULO1 = "12/06/2019 02:00";
+	private static final String FECHA_INICIO_VEHICULO2 = "14/06/2019 01:00";
+	private static final String FECHA_FIN_VEHICULO2 = "14/06/2019 01:30";
+
 	private static final double COSTO_VEHICULO = 4_000;
 	private SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	private static final int MOTOS_EN_PARQUEADERO_PARCIAL = 7;
@@ -47,7 +50,8 @@ public class ReglasParkingMotoTest {
 	private static final int CILINDRAJE_MOTO_ALTO = 500;
 
 	private static final double COSTO_VEHICULO1 = 6_000;
-
+	private static final double COSTO_VEHICULO2 = 500;
+	private static final double COSTO_VEHICULO3 = 2500;
 	@InjectMocks
 	private RulesParkingMotoImpl rulesParkingMotoImpl;
 
@@ -156,5 +160,43 @@ public class ReglasParkingMotoTest {
 
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO, costo, 0);
+	}
+	@Test
+	public void costoEstacionamiento30MinutosCilindrajeBajoTest() {
+		// arrange
+		Date fechaEntrada = null;
+		Date fechaSalida = null;
+		try {
+			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO2);
+			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO2);
+		} catch (ParseException e) {
+			fail();
+		}
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
+		// act
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
+
+		// assert
+		Assert.assertEquals(COSTO_VEHICULO2, costo, 0);
+	}
+	@Test
+	public void costoEstacionamiento30MinutosCilindrajeAltoTest() {
+		// arrange
+		Date fechaEntrada = null;
+		Date fechaSalida = null;
+		try {
+			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO2);
+			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO2);
+		} catch (ParseException e) {
+			fail();
+		}
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
+		// act
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
+
+		// assert
+		Assert.assertEquals(COSTO_VEHICULO3, costo, 0);
 	}
 }
