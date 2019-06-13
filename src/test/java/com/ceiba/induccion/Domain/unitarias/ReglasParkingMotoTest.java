@@ -97,6 +97,27 @@ public class ReglasParkingMotoTest {
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO, costo, 0);
 	}
+	
+	@Test
+	public void costoEstacionamiento9HorasCilindrajoAltoTest() {
+		// arrange
+		Date fechaEntrada = null;
+		Date fechaSalida = null;
+		try {
+			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
+			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
+		} catch (ParseException e) {
+			fail();
+		}
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
+		// act
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
+
+		// assert
+		Assert.assertEquals(COSTO_VEHICULO1, costo, 0);
+	}
+
 
 	@Test
 	public void costoEstacionamiento10HorasCilindrajeAltoTest() {
@@ -116,5 +137,24 @@ public class ReglasParkingMotoTest {
 
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO1, costo, 0);
+	}
+	@Test
+	public void costoEstacionamiento10HorasCilindrajeBajoTest() {
+		// arrange
+		Date fechaEntrada = null;
+		Date fechaSalida = null;
+		try {
+			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
+			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
+		} catch (ParseException e) {
+			fail();
+		}
+		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
+				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
+		// act
+		double costo = rulesParkingMotoImpl.calcularPago(registry);
+
+		// assert
+		Assert.assertEquals(COSTO_VEHICULO, costo, 0);
 	}
 }
