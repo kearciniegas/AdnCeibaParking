@@ -40,6 +40,7 @@ public class RegistryEntryCommandTest {
 		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registro.getPlaca());
 		Assert.assertEquals(VehicleType.CARRO, registro.getVehicleType());
 	}
+
 	@Test
 	public void registrarIngresoMotoSinRestriccionTest() {
 		// arrange
@@ -51,24 +52,26 @@ public class RegistryEntryCommandTest {
 		// assert
 		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registro.getPlaca());
 		Assert.assertEquals(VehicleType.MOTO, registro.getVehicleType());
-	}	
+	}
+
 	@Test
 	public void noRegistrarConPlacaExistenteTest() {
 		// arrange
 		Registry vehiculo = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
-						.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
+				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
-				// act
-				try {
-					registryEntry.execute(vehiculo);
-					registryEntry.execute(vehiculo);
-				} catch (Exceptions e) {
-					Assert.assertEquals(VigilantActivitiesImpl.SMS_ERROR_YA_ESTACIONADO, e.getMessage());
-					return;
-				}
+		// act
+		try {
+			registryEntry.execute(vehiculo);
+			registryEntry.execute(vehiculo);
+		} catch (Exceptions e) {
+			Assert.assertEquals(VigilantActivitiesImpl.SMS_ERROR_YA_ESTACIONADO, e.getMessage());
+			return;
+		}
 
-				// assert
-				fail();
-			}
+		// assert
+		fail();
+	}
 	
+
 }
