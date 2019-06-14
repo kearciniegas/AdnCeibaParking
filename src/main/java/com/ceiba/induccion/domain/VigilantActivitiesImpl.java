@@ -21,15 +21,13 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 	public static final String SMS_ERROR_NO_ESPACIO = "El parqueadero no cuenta con espacios para guardar el vehiculo";
 	public static final String SMS_ERROR_YA_ESTACIONADO = "El vehiculo ya esta parqueado";
 
-	@Autowired(required = true)
+	@Autowired
 	private RulesParkingImpl reglasParking;
 
-	@Autowired(required = true)
-	@Lazy
+	@Autowired
 	private PaymentPort paymentPort;
 
-	@Autowired(required = true)
-	@Lazy
+	@Autowired
 	private GetPortRegistration getPortRegistration;
 
 	@Override
@@ -38,8 +36,7 @@ public class VigilantActivitiesImpl implements VigilantActivities {
 			throw new Exceptions(SMS_ERROR_NO_PUEDE_INGRESO_ENTRE_SEMANA);
 		}
 
-		int numeroVehiculos = getPortRegistration.contarVehiculosEstacionados(registry.getVehicleType());
-		if (!reglasParking.validarSiHayEspacio(registry.getVehicleType(), numeroVehiculos)) {
+		if (!reglasParking.validarSiHayEspacio(registry.getVehicleType())) {
 			throw new Exceptions(SMS_ERROR_NO_ESPACIO);
 		}
 

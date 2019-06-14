@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
+import com.ceiba.induccion.domain.ports.GetPortRegistration;
 
 @Component
 public class RulesParkingImpl {
@@ -23,8 +24,12 @@ public class RulesParkingImpl {
 
 	@Autowired
 	private VigilantImpl vigilantImpl;
-
-	public boolean validarSiHayEspacio(VehicleType vehicleType, int numeroVehiculos) {
+	
+	@Autowired
+	private GetPortRegistration getPortRegistration;
+	
+	public boolean validarSiHayEspacio(VehicleType vehicleType) {
+		int numeroVehiculos = getPortRegistration.contarVehiculosEstacionados(vehicleType);
 		boolean espacio = false;
 		if (vehicleType == VehicleType.MOTO) {
 			espacio = moto.existeEspacio(numeroVehiculos);

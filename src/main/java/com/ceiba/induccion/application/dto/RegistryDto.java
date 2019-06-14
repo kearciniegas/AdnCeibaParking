@@ -1,11 +1,9 @@
 package com.ceiba.induccion.application.dto;
 
-import java.util.Date;
-
 public class RegistryDto {
 
 	private String placa;
-	private String tipo;
+	private String vehicleType;
 	private long cilindraje;
 	
 	
@@ -22,12 +20,12 @@ public class RegistryDto {
 		this.placa = placa;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getVehicleType() {
+		return vehicleType;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 
 	public long getCilindraje() {

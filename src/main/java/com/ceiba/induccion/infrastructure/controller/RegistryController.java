@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +36,12 @@ public class RegistryController {
 
     @PostMapping(value = "entrada")
     public Registry registrarIngreso(@RequestBody RegistryDto registryDto) {
-        return registerVehicleEntryCommad.execute(new Registry(registryDto.getPlaca(), VehicleType.valueOf(registryDto.getTipo()), registryDto.getCilindraje()));
+        return registerVehicleEntryCommad.execute(new Registry(registryDto.getPlaca(), VehicleType.valueOf(registryDto.getVehicleType()), registryDto.getCilindraje()));
     }
 
-    @PatchMapping(value = "salida")
-    public Payment registrarSalida(long idRegistro) {
-        return registerVehiclesExit.execute(idRegistro);
+    @PatchMapping(value = "salida/{id}")
+    public Payment registrarSalida(@PathVariable long id) {
+        return registerVehiclesExit.execute(id);
     }
 
     @GetMapping(value = "lista")
