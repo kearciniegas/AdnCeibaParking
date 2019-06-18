@@ -5,17 +5,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.induccion.domain.VigilantActivities;
-import com.ceiba.induccion.domain.entity.Registry;
-
+import com.ceiba.induccion.infrastructure.mapper.MapperRegistry;
 
 @Service
 @Transactional
 public class RegisterVehicleEntry {
 	@Autowired
-	VigilantActivities vigilantActivities;
+	private VigilantActivities vigilantActivities;
 
-	public Registry execute(Registry registry) {
-		return vigilantActivities.registrarEntrada(registry);
+	@Autowired
+	private MapperRegistry mapperRegistry;
+
+	public CommandEntry execute(CommandEntry commandEntry) {
+		CommandEntry registry = mapperRegistry.mapToRegistry(vigilantActivities.registrarEntrada(commandEntry));
+		return registry;
 	}
 
 }

@@ -1,6 +1,5 @@
-package com.ceiba.induccion.domain.unitarias;
+package com.ceiba.induccion.Domain.unitarias;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -15,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ceiba.induccion.Buider.RegistryBuilder;
+import com.ceiba.induccion.Buider.CommandEntryBuilder;
+import com.ceiba.induccion.application.command.CommandEntry;
 import com.ceiba.induccion.domain.RulesParkingImpl;
 import com.ceiba.induccion.domain.RulesParkingMotoImpl;
 import com.ceiba.induccion.domain.VigilantActivitiesImpl;
@@ -55,10 +55,10 @@ public class ServiceVigilantTest {
 		MockitoAnnotations.initMocks(ServiceVigilantTest.class);
 	}
 
-	@Test
+	@Test(expected = Exceptions.class)
 	public void noPermitirRegistrarMotoSinCupoTest() {
 		// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		when(registryRepository.contarVehiculosEstacionados(VehicleType.CARRO))
@@ -67,18 +67,14 @@ public class ServiceVigilantTest {
 		when(rulesParkingImpl.validarSiHayEspacio(VehicleType.MOTO)).thenReturn(Boolean.FALSE);
 
 		// act
-		try {
-			vigilantActivitiesImpl.registrarEntrada(registry);
-			fail();
-		} catch (Exceptions e) {
-			Assert.assertEquals(VigilantActivitiesImpl.SMS_ERROR_NO_ESPACIO, e.getMessage());
-		}
+		vigilantActivitiesImpl.registrarEntrada(commandEntry);
+
 	}
 
-	@Test
+	@Test(expected = Exceptions.class)
 	public void noPermitirRegistrarCarroSinCupoTest() {
 		// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conVehicleType(VehicleType.CARRO).build();
 
 		when(registryRepository.contarVehiculosEstacionados(VehicleType.CARRO))
@@ -87,12 +83,7 @@ public class ServiceVigilantTest {
 		when(rulesParkingImpl.validarSiHayEspacio(VehicleType.CARRO)).thenReturn(Boolean.FALSE);
 
 		// act
-		try {
-			vigilantActivitiesImpl.registrarEntrada(registry);
-			fail();
-		} catch (Exceptions e) {
-			Assert.assertEquals(VigilantActivitiesImpl.SMS_ERROR_NO_ESPACIO, e.getMessage());
-		}
+		vigilantActivitiesImpl.registrarEntrada(commandEntry);
 
 	}
 
@@ -100,28 +91,28 @@ public class ServiceVigilantTest {
 	public void noPermitirRegistrarVehiculoConRestriccionExceptionsTest() {
 		// arrange
 
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_CON_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_CON_RESTRICCION)
 				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		when(rulesParkingImpl.validarSiHayEspacio(VehicleType.MOTO)).thenReturn(false);
 
 		// act
-		vigilantActivitiesImpl.registrarEntrada(registry);
+		vigilantActivitiesImpl.registrarEntrada(commandEntry);
 
 	}
 
 	@Test
 	public void registrarMotoConCupoTest() {
 		// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		when(rulesParkingImpl.validarSiHayEspacio(VehicleType.MOTO)).thenReturn(Boolean.TRUE);
 
-		when(registryRepository.save(any())).thenReturn(registry);
+		when(registryRepository.save(any())).thenReturn(commandEntry);
 
 		// act
-		Registry registroAlmacenado = vigilantActivitiesImpl.registrarEntrada(registry);
+		Registry registroAlmacenado = vigilantActivitiesImpl.registrarEntrada(commandEntry);
 
 		// assert
 		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registroAlmacenado.getPlaca());

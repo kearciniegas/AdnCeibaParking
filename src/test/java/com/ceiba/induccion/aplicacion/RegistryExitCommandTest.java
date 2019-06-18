@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ceiba.induccion.Buider.RegistryBuilder;
+import com.ceiba.induccion.Buider.CommandEntryBuilder;
+import com.ceiba.induccion.application.command.CommandEntry;
 import com.ceiba.induccion.application.command.RegisterVehicleEntry;
 import com.ceiba.induccion.application.command.RegisterVehiclesExit;
 import com.ceiba.induccion.domain.RulesParkingMotoImpl;
 import com.ceiba.induccion.domain.entity.Payment;
-import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
 
 @RunWith(SpringRunner.class)
@@ -34,16 +34,16 @@ public class RegistryExitCommandTest {
 	public void registrarSalidaMotoTest() {
 
 		// arrage
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		// act
-		registry = registerVehicleEntry.execute(registry);
+		commandEntry = registerVehicleEntry.execute(commandEntry);
 
-		Payment registry2 = registrarSalidaCommand.execute(registry.getId());
+		Payment commandEntry2 = registrarSalidaCommand.execute(commandEntry.getId());
 
 		// assert
-		Assert.assertEquals(RulesParkingMotoImpl.PRECIO_MOTO_HORA, registry2.getValor(), 0);
+		Assert.assertEquals(RulesParkingMotoImpl.PRECIO_MOTO_HORA, commandEntry2.getValor(), 0);
 	}
 
 }

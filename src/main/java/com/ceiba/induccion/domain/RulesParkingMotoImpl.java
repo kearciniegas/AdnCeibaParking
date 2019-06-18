@@ -1,11 +1,7 @@
 package com.ceiba.induccion.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.ceiba.induccion.domain.entity.Registry;
 
-@Component("moto")
 public class RulesParkingMotoImpl implements RulesParking {
 
 	public static final int MAX_MOTOS_PARQUEADERO = 10;
@@ -17,8 +13,11 @@ public class RulesParkingMotoImpl implements RulesParking {
 	private static final long HORAS_MAX_DIA_MOTO = 24;
 	private static final long CILINDRAJE_MAX_MOTO = 500;
 
-	@Autowired
 	private VigilantImpl vigilantImpl;
+
+	public RulesParkingMotoImpl(VigilantImpl vigilantImpl) {
+		this.vigilantImpl = vigilantImpl;
+	}
 
 	@Override
 	public double calcularPago(Registry registry) {

@@ -1,7 +1,5 @@
 package com.ceiba.induccion.aplicacion;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,12 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ceiba.induccion.Buider.RegistryBuilder;
+import com.ceiba.induccion.Buider.CommandEntryBuilder;
+import com.ceiba.induccion.application.command.CommandEntry;
 import com.ceiba.induccion.application.command.RegisterVehicleEntry;
-import com.ceiba.induccion.domain.VigilantActivitiesImpl;
-import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
-import com.ceiba.induccion.domain.exception.Exceptions;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,47 +27,38 @@ public class RegistryEntryCommandTest {
 	@Test
 	public void registrarIngresoCarroSinRestriccionTest() {
 		// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conVehicleType(VehicleType.CARRO).build();
 		// act
-		Registry registro = registryEntry.execute(registry);
+		CommandEntry commandEntry1 = registryEntry.execute(commandEntry);
 
 		// assert
-		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registro.getPlaca());
-		Assert.assertEquals(VehicleType.CARRO, registro.getVehicleType());
+		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, commandEntry1.getPlaca());
+		Assert.assertEquals(VehicleType.CARRO, commandEntry1.getVehicleType());
 	}
 
 	@Test
 	public void registrarIngresoMotoSinRestriccionTest() {
 		// arrange
-		Registry registry = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conVehicleType(VehicleType.MOTO).build();
 		// act
-		Registry registro = registryEntry.execute(registry);
+		CommandEntry commandEntry1 = registryEntry.execute(commandEntry);
 
 		// assert
-		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, registro.getPlaca());
-		Assert.assertEquals(VehicleType.MOTO, registro.getVehicleType());
+		Assert.assertEquals(PLACA_VEHICULO_SIN_RESTRICCION, commandEntry1.getPlaca());
+		Assert.assertEquals(VehicleType.MOTO, commandEntry1.getVehicleType());
 	}
 
 	@Test
 	public void noRegistrarConPlacaExistenteTest() {
 		// arrange
-		Registry vehiculo = RegistryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
+		CommandEntry commandEntry = CommandEntryBuilder.defaultValues().conPlaca(PLACA_VEHICULO_SIN_RESTRICCION)
 				.conCilindraje(CILINDRAJE_MOTO).conVehicleType(VehicleType.MOTO).build();
 
 		// act
-		try {
-			registryEntry.execute(vehiculo);
-			registryEntry.execute(vehiculo);
-		} catch (Exceptions e) {
-			Assert.assertEquals(VigilantActivitiesImpl.SMS_ERROR_YA_ESTACIONADO, e.getMessage());
-			return;
-		}
+		registryEntry.execute(commandEntry);
 
-		// assert
-		fail();
 	}
-	
 
 }

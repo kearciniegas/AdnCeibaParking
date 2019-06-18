@@ -1,6 +1,4 @@
-package com.ceiba.induccion.domain.unitarias;
-
-import static org.junit.Assert.fail;
+package com.ceiba.induccion.Domain.unitarias;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,12 +35,11 @@ public class RulesParkingCarTest {
 	private static final String FECHA_INICIO_VEHICULO = "13/06/2019 01:00";
 	private static final String FECHA_FIN_VEHICULO = "13/06/2019 10:00";
 	private static final double COSTO_VEHICULO = 8_000;
-	
+
 	private static final String FECHA_INICIO_VEHICULO1 = "14/06/2019 00:00";
 	private static final String FECHA_FIN_VEHICULO1 = "15/06/2019 01:00";
 	private static final double COSTO_VEHICULO1 = 9_000;
-	
-	
+
 	private SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	private static final int CARROS_EN_PARQUEADERO_PARCIAL = 15;
 	public static final int MAS_CARROS_DE_LO_PERMITIDO_EN_PARQUEADERO = 21;
@@ -78,16 +75,13 @@ public class RulesParkingCarTest {
 	}
 
 	@Test
-	public void costoEstacionamiento9HorasCar() {
+	public void costoEstacionamiento9HorasCar() throws ParseException {
 		// arrange
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
-		try {
-			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
-			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
-		} catch (ParseException e) {
-			fail();
-		}
+		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
+		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
+
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_CARRO).conVehicleType(VehicleType.CARRO).build();
 		// act
@@ -96,18 +90,16 @@ public class RulesParkingCarTest {
 		// assert
 		Assert.assertEquals(COSTO_VEHICULO, costo, 0);
 	}
+
 	@Test
-	
-	public void costoEstacionamiento1Dia1HoraCarTest() {
+
+	public void costoEstacionamiento1Dia1HoraCarTest() throws ParseException {
 		// arrange
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
-		try {
-			fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
-			fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
-		} catch (ParseException e) {
-			fail();
-		}
+		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
+		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
+
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_CARRO).conVehicleType(VehicleType.MOTO).build();
 		// act
