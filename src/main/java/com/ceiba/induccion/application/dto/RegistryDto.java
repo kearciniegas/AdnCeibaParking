@@ -5,8 +5,6 @@ public class RegistryDto {
 	private String placa;
 	private String vehicleType;
 	private long cilindraje;
-	
-	
 
 	public RegistryDto() {
 		super();
@@ -35,6 +33,5 @@ public class RegistryDto {
 	public void setCilindraje(long cilindraje) {
 		this.cilindraje = cilindraje;
 	}
-
 
 }

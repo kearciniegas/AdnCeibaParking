@@ -36,8 +36,10 @@ public class RegistryController {
 
 	@PostMapping(value = "entrada")
 	public CommandEntry registrarIngreso(@RequestBody RegistryDto registryDto) {
-		return registerVehicleEntryCommad.execute(new CommandEntry(registryDto.getPlaca(),
-				VehicleType.valueOf(registryDto.getVehicleType()), registryDto.getCilindraje()));
+		CommandEntry commandEntry = new CommandEntry(registryDto.getPlaca(),
+													VehicleType.valueOf(registryDto.getVehicleType()), 
+													registryDto.getCilindraje());
+		return registerVehicleEntryCommad.execute(commandEntry);
 	}
 
 	@PatchMapping(value = "salida/{id}")
