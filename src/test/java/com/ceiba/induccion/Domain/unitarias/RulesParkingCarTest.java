@@ -7,12 +7,8 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Mockito;
 
 import com.ceiba.induccion.Buider.RegistryBuilder;
 import com.ceiba.induccion.domain.RulesParkingCarImpl;
@@ -21,14 +17,11 @@ import com.ceiba.induccion.domain.VigilantImpl;
 import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class RulesParkingCarTest {
 
 	@InjectMocks
 	private RulesParkingImpl rulesParkingImpl;
 
-	@Spy
 	private VigilantImpl vigilantImpl;
 
 	private static final String PLACA_CARRO = "1234";
@@ -44,17 +37,17 @@ public class RulesParkingCarTest {
 	private static final int CARROS_EN_PARQUEADERO_PARCIAL = 15;
 	public static final int MAS_CARROS_DE_LO_PERMITIDO_EN_PARQUEADERO = 21;
 
-	@InjectMocks
 	private RulesParkingCarImpl rulesParkingCarImpl;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(RulesParkingCarTest.class);
+		vigilantImpl = Mockito.mock(VigilantImpl.class);
 	}
 
 	@Test
 	public void siExisteCupoCarTest() {
 		// arrange
+		rulesParkingCarImpl = new RulesParkingCarImpl(vigilantImpl);
 
 		// act
 		boolean resultado = rulesParkingCarImpl.existeEspacio(CARROS_EN_PARQUEADERO_PARCIAL);
@@ -66,6 +59,7 @@ public class RulesParkingCarTest {
 	@Test
 	public void noExisteCupoCarTest() {
 		// arrange
+		rulesParkingCarImpl = new RulesParkingCarImpl(vigilantImpl);
 
 		// act
 		boolean resultado = rulesParkingCarImpl.existeEspacio(MAS_CARROS_DE_LO_PERMITIDO_EN_PARQUEADERO);
@@ -76,11 +70,14 @@ public class RulesParkingCarTest {
 
 	@Test
 	public void costoEstacionamiento9HorasCar() throws ParseException {
+
 		// arrange
+		rulesParkingCarImpl = new RulesParkingCarImpl(vigilantImpl);
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(9L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_CARRO).conVehicleType(VehicleType.CARRO).build();
@@ -95,10 +92,13 @@ public class RulesParkingCarTest {
 
 	public void costoEstacionamiento1Dia1HoraCarTest() throws ParseException {
 		// arrange
+		rulesParkingCarImpl = new RulesParkingCarImpl(vigilantImpl);
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(25L);
+
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_CARRO).conVehicleType(VehicleType.MOTO).build();

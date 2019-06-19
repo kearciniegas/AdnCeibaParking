@@ -16,6 +16,11 @@ public class RegisterVehicleEntry {
 	@Autowired
 	private MapperRegistry mapperRegistry;
 
+	public RegisterVehicleEntry(MapperRegistry mapperRegistry, VigilantActivities vigilantActivities) {
+		this.mapperRegistry = mapperRegistry;
+		this.vigilantActivities = vigilantActivities;
+	}
+
 	public CommandEntry execute(CommandEntry commandEntry) {
 		CommandEntry registry = mapperRegistry.mapToRegistry(vigilantActivities.registrarEntrada(commandEntry));
 		return registry;

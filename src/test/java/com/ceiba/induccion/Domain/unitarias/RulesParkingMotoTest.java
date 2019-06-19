@@ -7,12 +7,8 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Mockito;
 
 import com.ceiba.induccion.Buider.RegistryBuilder;
 import com.ceiba.induccion.domain.RulesParkingImpl;
@@ -21,14 +17,11 @@ import com.ceiba.induccion.domain.VigilantImpl;
 import com.ceiba.induccion.domain.entity.Registry;
 import com.ceiba.induccion.domain.entity.VehicleType;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class RulesParkingMotoTest {
 
 	@InjectMocks
 	private RulesParkingImpl rulesParkingImpl;
 
-	@Spy
 	private VigilantImpl vigilantImpl;
 
 	private static final String PLACA_MOTO = "LGH156";
@@ -52,18 +45,18 @@ public class RulesParkingMotoTest {
 	private static final double COSTO_VEHICULO2 = 500;
 	private static final double COSTO_VEHICULO3 = 2_500;
 	private static final double COSTO_VEHICULO4 = 4_500;
-
-	@InjectMocks
+	
 	private RulesParkingMotoImpl rulesParkingMotoImpl;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(RulesParkingMotoTest.class);
+		vigilantImpl = Mockito.mock(VigilantImpl.class);
 	}
 
 	@Test
 	public void siExisteCupoTest() {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
 
 		// act
 		boolean resultado = rulesParkingMotoImpl.existeEspacio(MOTOS_EN_PARQUEADERO_PARCIAL);
@@ -75,6 +68,7 @@ public class RulesParkingMotoTest {
 	@Test
 	public void noExisteCupoTest() {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
 
 		// act
 		boolean resultado = rulesParkingMotoImpl.existeEspacio(MAS_MOTOS_DE_LO_PERMITIDO_EN_PARQUEADERO);
@@ -86,10 +80,12 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento9HorasCilindrajeBajoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(9L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
@@ -103,10 +99,13 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento9HorasCilindrajoAltoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(9L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
@@ -120,11 +119,14 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento10HorasCilindrajeAltoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(10L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
@@ -138,11 +140,14 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento10HorasCilindrajeBajoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO1);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO1);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(10L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
@@ -156,11 +161,13 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento30MinutosCilindrajeBajoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO2);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO2);
-
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(1L);
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
 		// act
@@ -173,11 +180,14 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento30MinutosCilindrajeAltoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO2);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO2);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(1L);
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_ALTO).build();
@@ -191,10 +201,14 @@ public class RulesParkingMotoTest {
 	@Test
 	public void costoEstacionamiento1Dia1HoraCilindrajeBajoTest() throws ParseException {
 		// arrange
+		rulesParkingMotoImpl = new RulesParkingMotoImpl(vigilantImpl);
+
 		Date fechaEntrada = null;
 		Date fechaSalida = null;
 		fechaEntrada = formatoFechaHora.parse(FECHA_INICIO_VEHICULO3);
 		fechaSalida = formatoFechaHora.parse(FECHA_FIN_VEHICULO3);
+		Mockito.when(vigilantImpl.hoursBetweenDate(fechaEntrada, fechaSalida)).thenReturn(25L);
+
 
 		Registry registry = RegistryBuilder.defaultValues().conFechaEntrada(fechaEntrada).conFechaSalida(fechaSalida)
 				.conPlaca(PLACA_MOTO).conVehicleType(VehicleType.MOTO).conCilindraje(CILINDRAJE_MOTO_BAJO).build();
