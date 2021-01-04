@@ -94,4 +94,3 @@ Después de importar el proyecto se queda viendo de la siguiente manera
 ![enter image description here](https://drive.google.com/uc?id=1x2ZVpM2steX0Er-jDNoffQ_V6pRVdW0k)
 
 
-*Cualquier duda o aporte con este bloque contactar a juan.botero@ceiba.com.co o juan.castano@ceiba.com.co*
